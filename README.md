@@ -1,1 +1,1 @@
-# blackjack
+# It's a simple blackjack game based on Udemy course
