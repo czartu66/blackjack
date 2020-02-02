@@ -22,14 +22,14 @@ class Player(object):
         """
         while True:
             try:
-                self.bet = int(raw_input('Give your bet (Please enter an integer): '))
+                self.bet = int(input('Give your bet (Please enter an integer): '))
             except:
-                print "You didn't enter an integer, please try again"
+                print("You didn't enter an integer, please try again")
                 continue
             if self.bet > self.money:
-                print "You don't have this amount of money, give smaller value"
+                print("You don't have this amount of money, give smaller value")
             else:
-                print "You gave your bet"
+                print("You gave your bet")
                 break
         self.money -= self.bet
         return 'Your current money: %d ' % self.money
@@ -54,9 +54,10 @@ class Player(object):
         :return: Two cards which are on hand of a player
         """
         self.on_hand = \
-            str(random.choice(Player.card.values())) + " of " + str(random.choice(Player.suits.values()))+'\n'
+            str(random.choice(list(Player.card.values()))) + " of " + str(random.choice(list(Player.suits.values())))+'\n'
         self.on_hand =  \
-            self.on_hand + str(random.choice(Player.card.values())) + " of " + str(random.choice(Player.suits.values()))
+            self.on_hand + str(random.choice(list(Player.card.values()))) + " of " + \
+            str(random.choice(list(Player.suits.values())))
         return self.on_hand
 
     def check_actual_points(self):
@@ -67,8 +68,8 @@ class Player(object):
         cards = self.on_hand.split('\n')
         cards_values = [i.split()[0] for i in cards]
         self.points = 0
-        for element in xrange(0, len(cards_values)):
-            points = [val for key, val in Player.card_points.iteritems() if key == cards_values[element]]
+        for element in range(0, len(cards_values)):
+            points = [val for key, val in Player.card_points.items() if key == cards_values[element]]
             points = map(str, points)
             points = int(''.join(points))
             self.points += points
@@ -80,7 +81,7 @@ class Player(object):
         In this method Player can choose which value will have an Ace card
         """
         while True:
-            val_of_ace = int(raw_input('Choose value of Ace(you can choose 1 or 11): '))
+            val_of_ace = int(input('Choose value of Ace(you can choose 1 or 11): '))
             if val_of_ace == 1:
                 Player.card_points['Ace'] = 1
                 break
@@ -88,26 +89,26 @@ class Player(object):
                 Player.card_points['Ace'] = 11
                 break
             else:
-                print 'You gave incorrect value, choose between 1 or 11'
+                print('You gave incorrect value, choose between 1 or 11')
 
     def choose_action(self):
         """
         In this method Player choose one from two avaible actions: hit or stand
         """
         while True:
-            action = raw_input("Choose action (You can choose 'hit' or 'stand'): ")
+            action = input("Choose action (You can choose 'hit' or 'stand'): ")
             if action == 'hit':
-                print 'You chose hit action'
-                self.on_hand = self.on_hand + '\n' + str(random.choice(Player.card.values())) \
-                               + " of " + str(random.choice(Player.suits.values()))
-                print 'Your cards: ' + '\n' + self.on_hand
-                print 'Your actual points: ',  self.check_actual_points()
+                print('You chose hit action')
+                self.on_hand = self.on_hand + '\n' + str(random.choice(list(Player.card.values()))) \
+                               + " of " + str(random.choice(list(Player.suits.values())))
+                print('Your cards: ' + '\n' + self.on_hand)
+                print('Your actual points: ',  self.check_actual_points())
                 break
             if action == 'stand':
-                print 'You chose stand action'
+                print('You chose stand action')
                 break
             else:
-                print "You chose wrong action. Try again, choose 'hit' or 'stand'"
+                print("You chose wrong action. Try again, choose 'hit' or 'stand'")
                 continue
 
 
